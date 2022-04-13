@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,18 +16,32 @@ export const Addtask = () => {
         const [Description, setDescription] = useState('')
         const [Time, setTime] = useState('')
         const [Priority, setPriority] = useState('')
+        // const [, setsubject] = useState('6244443a29312c4ecc04197b')
+        const [author, setauthor] = useState(localStorage.getItem('_id'))
+        var auth= localStorage.getItem('email')
     
 
       let Navigate=useNavigate()
+     useEffect(() => {
+    if(!auth){
+        Navigate("/signin")
+    }
+     }, [])
+     
+    
     const submit=(e)=>{
         e.preventDefault()
         var data={
             TaskName:TaskName,
             Description:Description,
             Time:Time,
-            Priority:Priority
+            Priority:Priority,
+            author:author
 
         }
+
+
+  
         axios.post("http://localhost:3001/tasks",data).then(res=>{
             // alert("Task Adedd.....")
             console.log(res.data.data)
@@ -80,8 +94,9 @@ export const Addtask = () => {
                   {/* <label className="form-label" htmlFor="form3Example4cdg">Repeat your password</label> */}
                 </div>
                
-                <div className="d-flex justify-content-center">
-                  <button type="submit" className="btn btn-success btn-block btn-lg gradient-custom-4 text-body" >Add Task</button>
+                <div className="d-flex justify-content-center">{
+                 TaskName && Description && Time && Priority ? <button type="submit" className="btn btn-success btn-block btn-lg gradient-custom-4 text-body" >Add Task</button> : <button type="submit" className="btn btn-success btn-block btn-lg gradient-custom-4 text-body" disabled>Add Task</button>
+                }
                   <ToastContainer/>
                 </div>
                  {/* <button type="submit" className="fw-bold text-body">Add Task</button       > */}

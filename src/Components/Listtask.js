@@ -30,10 +30,12 @@ export const Listtask = () => {
     </tr>
   </thead>
   <tbody>
+    
+ 
       {
           tasklist.map((task)=>{
-              return(
-                <tr>
+              return(  <> 
+              {localStorage.getItem('_id')=== task.author ?<tr>
                 {/* <th scope="row">1</th> */}
                 <td>{task.TaskName}</td>
                 <td>{task.Description}</td>
@@ -42,12 +44,14 @@ export const Listtask = () => {
                 <td>
                     <Link to={`/table/Update/${task._id}`} className="btn btn-primary">UPDATE</Link>
                     <Link to={`/table/Delete/${task._id}`} className="btn btn-danger">DELETE</Link>
-                    
                 </td>
-              </tr>
+              </tr>:""}
+              </>
               )
           })
+          
       }
+    
     
 
   </tbody>

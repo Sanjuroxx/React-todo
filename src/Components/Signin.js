@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 export const Signin = () => {
     const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
@@ -22,10 +23,12 @@ var data={
     localStorage.setItem('firstName',res.data.data.firstName)
     localStorage.setItem('email',res.data.data.email)
     localStorage.setItem('role',res.data.data.role.roleName)
+    localStorage.setItem('_id',res.data.data._id)
+    localStorage.setItem('isLoggedIn',true)
 
     toast(res.data.msg)
     setTimeout(() => {
-      Navigate('/task')
+      Navigate('/')
     }, 2000);
   }
   else{ 
@@ -38,8 +41,8 @@ var data={
   }
     })
   }
-  return (
-    // <div>
+  return ( 
+    <div>
 <section className="vh-100" style={{backgroundColor: '#FFFFFF'}}>
   <div className="container py-5 h-100">
     <div className="row d-flex justify-content-center align-items-center h-100">
@@ -65,10 +68,10 @@ var data={
                     <input type="password" id="form2Example27" className="form-control form-control-lg" placeholder='Password' onChange={(e)=>{setpassword(e.target.value)}}/>
                     <label className="form-label" htmlFor="form2Example27"></label>
                   </div>
-                  <div className="pt-1 mb-4">
-                    <button className="btn btn-dark btn-lg btn-block" type="submit">Login</button>
-                    <ToastContainer
-position="top-right"
+                  <div className="pt-1 mb-4">{
+                   email && password ? <button className="btn btn-dark btn-lg btn-block" type="submit">Login</button>  :<button className="btn btn-dark btn-lg btn-block" type="submit" disabled>Login</button>
+                   } <ToastContainer
+position="top-center"
   autoClose={1800}
 hideProgressBar={false}
 newestOnTop={false}
@@ -79,8 +82,8 @@ draggable
 pauseOnHover
 /> 
                   </div>
-                  <a className="small text-muted" href="#!">Forgot password?</a>
-                  <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Don't have an account? <Link to="/signup" style={{color: '#393f81'}}>Register here</Link></p>
+                  <Link className="small " to="/forgotPassword" style={{color: '#FF0000'}}>Forgot password?</Link>
+                  <p className="mb-5 pb-lg-2"style={{color: '#393f81'}}>Don't have an account? <Link to="/signup" style={{color: '#393f81'}}>Register here</Link></p>
                 </form>
               </div>
             </div>
@@ -90,7 +93,6 @@ pauseOnHover
     </div>
   </div>
 </section>
-
-    // </div>
+</div>
   )
 }

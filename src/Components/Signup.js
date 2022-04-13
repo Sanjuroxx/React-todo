@@ -26,7 +26,7 @@ export const Signup = () => {
       }
       axios.post("http://localhost:3001/users",data).then(res=>{
           // alert("Signup Done!!!")
-          toast.success('🦄 Signup done!!', {
+          toast.success('🦄 Signup done!! Please Login' , {
               position: "top-center",
               autoClose: 500,
               hideProgressBar: false,
@@ -36,7 +36,7 @@ export const Signup = () => {
               progress: undefined,
               });
               setTimeout(() => {
-                  navigate('/task')    
+                  navigate('/signin')    
               }, 2000);
        
       })
@@ -100,8 +100,9 @@ export const Signup = () => {
                     </div>
                     <p>Already have an account? <Link to="/signin" className="link-info">Click here</Link></p>
 
-                    <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" className="btn btn-primary btn-lg">Register</button>
+                    <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">{
+                      firstName && lastName && email && gender && password ? <button type="submit" className="btn btn-primary btn-lg">Register</button>:<button type="submit" disabled className="btn btn-primary btn-lg">Register</button>
+                    }
                       <ToastContainer 
                     autoClose={1800}/>
                     </div>
