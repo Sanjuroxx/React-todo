@@ -49,7 +49,7 @@ export const Navbar = () => {
             <Link className="nav-link scrollto my-element" to="/signin">Signin</Link>
           </div>
             <div>
-              <Link className="nav-link scrollto my-element" to="/signup">Signup</Link>
+              <Link className="nav-link scrollto " to="/signup">Signup</Link>
             </div>
           </> :<>
            <div>
@@ -57,8 +57,8 @@ export const Navbar = () => {
           </div>
           <Link to={`/profile/${localStorage.getItem('_id')}`}>    
           <div className='icon '>
-          <i class="fa fa-user" aria-hidden="true"></i>
-          {/* {localStorage.getItem('firstName')}    */}
+          <i className="fa fa-user" aria-hidden="true"></i>
+          {localStorage.getItem('firstName')}   
           </div>            
           </Link></>}
           <ToastContainer
